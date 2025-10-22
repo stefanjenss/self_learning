@@ -146,12 +146,22 @@ results = engine.run_backtest(strategy, games, predictions, confidences)
 
 ## Data Sources
 
-All data comes from [NFLfastR](https://www.nflfastr.com/) via the [nfl_data_py](https://github.com/nflverse/nfl_data_py) package:
+### Historical Data (Training)
+All historical data comes from [NFLfastR](https://www.nflfastr.com/) via the [nfl_data_py](https://github.com/nflverse/nfl_data_py) package:
 - Play-by-play data (2015-2024)
 - Game schedules and results
 - Weekly team statistics
 - Roster information
 - Injury reports (where available)
+- **Updates**: Within 15 minutes after each game
+
+### Real-Time Data (Predictions)
+For upcoming games and live odds, integrate with:
+- **[The Odds API](https://the-odds-api.com/)**: Live betting lines (free tier: 500 req/month)
+- **ESPN API**: Unofficial but free game schedules
+- **[SportsDataIO](https://sportsdata.io/)**: Professional-grade data (paid)
+
+See [docs/REALTIME_DATA.md](docs/REALTIME_DATA.md) for complete integration guide.
 
 ## Configuration
 
