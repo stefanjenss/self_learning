@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Game Predictor & Betting Backtester</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>NFL Game Predictor & Betting Strategy Backtester</h1>
+        <p>Predict NFL games and test betting strategies using NFLfastR data</p>
+    </header>
+
+    <div class="container">
+        <nav class="tabs">
+            <button class="tab-button active" onclick="openTab('predictions')">Predictions</button>
+            <button class="tab-button" onclick="openTab('backtest')">Backtest</button>
+            <button class="tab-button" onclick="openTab('compare')">Compare Strategies</button>
+            <button class="tab-button" onclick="openTab('models')">Models</button>
+        </nav>
+
+        <!-- Predictions Tab -->
+        <div id="predictions" class="tab-content active">
+            <h2>Recent Game Predictions</h2>
+            <button onclick="loadPredictions()">Load Predictions</button>
+            <div id="predictions-container">
+                <p class="loading">Click "Load Predictions" to see recent game predictions...</p>
+            </div>
+        </div>
+
+        <!-- Backtest Tab -->
+        <div id="backtest" class="tab-content">
+            <h2>Backtest Betting Strategy</h2>
+            <div class="form-group">
+                <label for="strategy-select">Select Strategy:</label>
+                <select id="strategy-select">
+                    <option value="kelly">Kelly Criterion</option>
+                    <option value="flat">Flat Betting</option>
+                    <option value="percentage">Percentage Betting</option>
+                    <option value="confidence">Confidence Threshold</option>
+                    <option value="value">Value Betting</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bankroll-input">Starting Bankroll ($):</label>
+                <input type="number" id="bankroll-input" value="10000" min="100" step="100">
+            </div>
+            <button onclick="runBacktest()">Run Backtest</button>
+            <div id="backtest-results"></div>
+            <div id="bankroll-chart"></div>
+        </div>
+
+        <!-- Compare Tab -->
+        <div id="compare" class="tab-content">
+            <h2>Compare All Strategies</h2>
+            <div class="form-group">
+                <label for="compare-bankroll">Starting Bankroll ($):</label>
+                <input type="number" id="compare-bankroll" value="10000" min="100" step="100">
+            </div>
+            <button onclick="compareStrategies()">Compare Strategies</button>
+            <div id="comparison-results"></div>
+        </div>
+
+        <!-- Models Tab -->
+        <div id="models" class="tab-content">
+            <h2>Model Information</h2>
+            <button onclick="loadModelInfo()">Load Model Info</button>
+            <div id="model-info-container"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
