@@ -47,8 +47,9 @@ class BacktestEngine:
         bankroll_history = [strategy.initial_bankroll]
 
         for idx, (_, game) in enumerate(games.iterrows()):
-            prediction = predictions.iloc[idx]
-            confidence = confidences.iloc[idx]
+            # Handle both Series and numpy arrays
+            prediction = predictions.iloc[idx] if hasattr(predictions, 'iloc') else predictions[idx]
+            confidence = confidences.iloc[idx] if hasattr(confidences, 'iloc') else confidences[idx]
 
             # Calculate bet size
             bet_size = strategy.calculate_bet_size(game, prediction, confidence)
